@@ -1,34 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-websocket-test',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './websocket-test.component.html',
   styleUrl: './websocket-test.component.css',
 })
 export class WebsocketTestComponent implements OnInit {
-  message: string[] = [];
+  messages: string[] = [];
   inputMessage: string = '';
-  URL_WEB_SOCKET_ENDPOINT:string = "";
-
-  ngOnInit(): void {
-
-    this.socket.connect(this.URL_WEB_SOCKET_ENDPOINT)
-    .subscribe( 
-      (message)=> 
-      this.message.push(message),
-      error => console.error('WebSocketError'.error),
-
-    }
-
-    )
-    
-  }
+  inputUrl: string = "";
 
   /**
-   *
-   */
-  constructor(private socket: WebsocketService) {}
+  *
+  */
+  constructor(private socket: WebsocketService) {
+
+  }
+
+  ngOnInit(): void {
+    this.socket.connect(this.inputUrl)
+      .subscribe({
+        next: (message) => this.messages.push(message),
+        error: (error) => console.error('WebSocketError', error),
+        complete: () => console.log('WebSocket Connection is Closed')
+      });
+
+  }
+
+  sendMessage(): void {
+    if (this.inputMessage.trim()) {
+      this.socket.send(this.inputMessage);
+      this.inputMessage = '';
+    }
+  }
+
+
+
 }

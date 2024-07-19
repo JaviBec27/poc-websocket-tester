@@ -1,0 +1,25 @@
+div {
+  margin: 20px;
+}
+
+input {
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f1f1;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}

@@ -1,1 +1,16 @@
-<p>websocket-test works!</p>
+<div>
+  <h2>WebSocket Test</h2>
+  <div>
+    <input [(ngModel)]="inputUrl" placeholder="Enter message" />
+  </div>
+  <div>
+    <input [(ngModel)]="inputMessage" placeholder="Enter message" />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+  <div>
+    <h3>Messages</h3>
+    <ul>
+      <li *ngFor="let message of messages">{{ message }}</li>
+    </ul>
+  </div>
+</div>
